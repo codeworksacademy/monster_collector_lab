@@ -10,18 +10,20 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.0.96/css/materialdesignicons.min.css"
     integrity="sha512-fXnjLwoVZ01NUqS/7G5kAnhXNXat6v7e3M9PhoMHOTARUMCaf5qNO84r5x9AFf5HDzm3rEZD8sb/n6dZ19SzFA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style/main.css">
   <link rel="stylesheet" href="assets/style/style.css">
-  <title>pokedex</title>
+  <title>Monster Collector</title>
 </head>
 
 <body class="bg-dark">
   <header>
-    <nav class="navbar navbar-expand bg-success text-light px-2">
-      <a class="navbar-brand" href="#">
-        <img src="https://codeworks.blob.core.windows.net/public/assets/img/cw-mark.png" height="45" alt=""
-          loading="lazy">
-        <span class="ml-2">pokedex</span>
+    <nav class="navbar navbar-expand bg-danger text-light text-shadow px-2">
+      <a class="navbar-brand px-3 text-light" href="#">
+        <span class="ml-2">Monster Collector</span>
+        <i class="mdi mdi-pokeball"></i>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +40,18 @@
   </header>
 
   <main>
+    <div class="container-fluid">
+      <div class="row my-3">
+        <section class="col-3">
+          <div class="border border-1 border-danger rounded text-success p-2">
+            <p id="region" class="text-center">Kanto 151</p>
+            <ul>
+              <!-- pokemon draw here! -->
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
 
   </main>
 
