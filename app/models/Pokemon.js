@@ -5,15 +5,10 @@ export class Pokemon {
 
   get listHTMLTemplate() {
     return `
-    <li class="d-flex gap-2 align-items-center mb-1">
+    <li onclick="app.WildPokemonsController.getWildPokemonDetailsByName('${this.name}')" class="d-flex gap-2 align-items-center mb-1" role="button" title="See details for ${this.name}">
       <i class="mdi mdi-pokeball"></i>
-      <span>${this.name}</span>
+      <span class="text-capitalize">${this.name}</span>
     </li>
     `
   }
-}
-
-let data = {
-  "name": "bulbasaur",
-  "url": "https://pokeapi.co/api/v2/pokemon/1/"
 }

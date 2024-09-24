@@ -18,6 +18,15 @@ export class WildPokemonsController {
     }
   }
 
+  async getWildPokemonDetailsByName(pokemonName) {
+    try {
+      await wildPokemonsService.getWildPokemonDetailsByName(pokemonName)
+    } catch (error) {
+      Pop.error(error)
+      console.error(error);
+    }
+  }
+
   drawWildPokemons() {
     const pokemons = AppState.wildPokemons
     let htmlContent = ''
