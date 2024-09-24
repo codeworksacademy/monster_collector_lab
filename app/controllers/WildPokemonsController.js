@@ -32,7 +32,7 @@ export class WildPokemonsController {
     const pokemons = AppState.wildPokemons
     let htmlContent = ''
     pokemons.forEach(pokemon => htmlContent += pokemon.listHTMLTemplate)
-    setHTML('wild-pokemons', htmlContent)
+    setHTML('wild-pokemons-list', htmlContent)
   }
 
   drawActivePokemon() {
