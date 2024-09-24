@@ -17,16 +17,16 @@ export class Pokemon {
 export class DetailedPokemon extends Pokemon {
   constructor(data) {
     super(data)
-    this.id = data.id || ''
-    this.nickName = data.nickName || ''
-    this.img = data.img || data.sprites.front_default
-    this.backImg = data.backImg || data.sprites.back_default
+    this.id = data.id ?? ''
+    this.nickName = data.nickName ?? ''
+    this.img = data.img ?? data.sprites.front_default
+    this.backImg = data.backImg ?? data.sprites.back_default
     this.weight = data.weight
     this.height = data.height
-    this.health = data.health || data.stats[0].base_stat
-    this.defense = data.defense || data.stats[2].base_stat
-    this.attack = data.attack || data.stats[1].base_stat
-    this.speed = data.speed || data.stats[5].base_stat
+    this.health = data.health ?? data.stats[0].base_stat
+    this.defense = data.defense ?? data.stats[2].base_stat
+    this.attack = data.attack ?? data.stats[1].base_stat
+    this.speed = data.speed ?? data.stats[5].base_stat
     this.types = data.types
   }
 
@@ -72,7 +72,7 @@ export class DetailedPokemon extends Pokemon {
           </div>
         </div>
         <div class="text-center mt-2">
-          <button class="btn btn-success">Catch em!</button>
+          <button onclick="app.SandboxPokemonsController.catchPokemon()" class="btn btn-success">Catch em!</button>
         </div>
       </div>
     </div>
