@@ -8,6 +8,8 @@
 ul {
   margin: 0;
   padding: 0;
+  height: 70dvh;
+  overflow-y: auto;
 }
 
 ul,

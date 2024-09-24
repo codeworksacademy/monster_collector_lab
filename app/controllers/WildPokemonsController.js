@@ -7,6 +7,8 @@ export class WildPokemonsController {
   constructor() {
     AppState.on('wildPokemons', this.drawWildPokemons)
     AppState.on('activePokemon', this.drawActivePokemon)
+    AppState.on('activePokemon', this.drawWildPokemons)
+
     this.getWildPokemons()
   }
 
@@ -36,6 +38,10 @@ export class WildPokemonsController {
   }
 
   drawActivePokemon() {
-    setHTML('pokemon-details', AppState.activePokemon.detailsHTMLTemplate)
+    const activePokemon = AppState.activePokemon
+
+    if (!activePokemon) return
+
+    setHTML('pokemon-details', activePokemon.detailsHTMLTemplate)
   }
 }

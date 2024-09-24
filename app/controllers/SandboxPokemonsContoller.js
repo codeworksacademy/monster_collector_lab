@@ -7,11 +7,14 @@ export class SandboxPokemonsController {
   constructor() {
     AppState.on('user', this.drawMyPokemonElem)
     AppState.on('user', this.getMySandboxPokemons)
+    AppState.on('user', () => { AppState.emit('activePokemon') })
     AppState.on('sandboxPokemons', this.drawSandboxPokemons)
+    AppState.on('activePokemon', this.drawSandboxPokemons)
   }
   async catchPokemon() {
     try {
       const nickName = window.prompt("Give this pokemon a nickname!")
+      if (nickName == null) return
       await sandboxPokemonsService.catchPokemon(nickName)
     } catch (error) {
       Pop.error(error)
@@ -34,6 +37,7 @@ export class SandboxPokemonsController {
   }
 
   drawSandboxPokemons() {
+    if (!AppState.user) return
     const pokemons = AppState.sandboxPokemons
     let htmlContent = ''
     pokemons.forEach(pokemon => htmlContent += pokemon.listHTMLTemplate)

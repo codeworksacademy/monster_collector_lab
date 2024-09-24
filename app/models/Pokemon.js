@@ -1,13 +1,20 @@
+import { AppState } from "../AppState.js"
+
 export class Pokemon {
   constructor(data) {
     this.name = data.name
+    this.nickName = ''
+  }
+
+  get isActive() {
+    return this.name == AppState.activePokemon?.name
   }
 
   get listHTMLTemplate() {
     return `
     <li onclick="app.WildPokemonsController.getWildPokemonDetailsByName('${this.name}')" class="d-flex gap-2 align-items-center mb-1" role="button" title="See details for ${this.name}">
-      <i class="mdi mdi-pokeball"></i>
-      <span class="text-capitalize">${this.name}</span>
+      <i class="mdi mdi-pokeball ${this.isActive ? 'mdi-spin' : ''}"></i>
+      <span class="text-capitalize ${this.isActive ? 'text-light' : 'text-success'}">${this.nickName ? this.nickName : this.name}</span>
     </li>
     `
   }
@@ -17,7 +24,7 @@ export class Pokemon {
 export class DetailedPokemon extends Pokemon {
   constructor(data) {
     super(data)
-    this.id = data.id ?? ''
+    this.id = data.id
     this.nickName = data.nickName ?? ''
     this.img = data.img ?? data.sprites.front_default
     this.backImg = data.backImg ?? data.sprites.back_default
@@ -71,12 +78,21 @@ export class DetailedPokemon extends Pokemon {
             <span>${this.heightAsFeet} ft</span>
           </div>
         </div>
-        <div class="text-center mt-2">
-          <button onclick="app.SandboxPokemonsController.catchPokemon()" class="btn btn-success">Catch em!</button>
-        </div>
+        ${this.catchButton}
       </div>
     </div>
     `
+  }
+
+  get catchButton() {
+    if (!AppState.user) return ''
+
+    return `
+    <div class="text-center mt-2">
+      <button onclick="app.SandboxPokemonsController.catchPokemon()" class="btn btn-success">Catch em!</button>
+    </div>
+    `
+
   }
 
   get weightAsPounds() {
@@ -89,7 +105,7 @@ export class DetailedPokemon extends Pokemon {
 
   get typeSpans() {
     const icons = {
-      normal: 'mdi-circle-outline',
+      normal: 'mdi-circle-slice-8',
       fighting: 'mdi-boxing-glove',
       flying: 'mdi-airplane',
       poison: 'mdi-skull-crossbones',
@@ -102,7 +118,7 @@ export class DetailedPokemon extends Pokemon {
       water: 'mdi-water',
       grass: 'mdi-leaf',
       electric: 'mdi-flash',
-      psychic: 'mdi-head-cog',
+      psychic: 'mdi-head-snowflake',
       ice: 'mdi-delete-variant',
       dragon: 'mdi-snake',
       dark: 'mdi-brightness-4',
