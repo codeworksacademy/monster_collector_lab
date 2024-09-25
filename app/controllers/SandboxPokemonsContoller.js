@@ -13,7 +13,7 @@ export class SandboxPokemonsController {
   }
   async catchPokemon() {
     try {
-      const nickName = window.prompt("Give this pokemon a nickname!")
+      const nickName = window.prompt("Give this pokemon a nickname!", AppState.activePokemon.name)
       if (nickName == null) return
       await sandboxPokemonsService.catchPokemon(nickName)
     } catch (error) {
