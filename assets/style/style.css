@@ -31,3 +31,9 @@ li {
 .profile-picture.profile-picture-sm {
   height: 64px;
 }
+
+@media screen and (max-width: 991.98px) {
+  .pokemon-row>* {
+    margin-bottom: 2em;
+  }
+}
