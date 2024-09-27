@@ -3,7 +3,6 @@ import { AppState } from "../AppState.js"
 export class Pokemon {
   constructor(data) {
     this.name = data.name
-    this.nickName = ''
   }
 
   get isActive() {
@@ -14,7 +13,7 @@ export class Pokemon {
     return `
     <li onclick="app.WildPokemonsController.getWildPokemonDetailsByName('${this.name}')" class="d-flex gap-2 align-items-center mb-1" role="button" title="See details for ${this.name}">
       <i class="mdi mdi-pokeball ${this.isActive ? 'mdi-spin' : ''}"></i>
-      <span class="text-capitalize ${this.isActive ? 'text-light' : 'text-success'}">${this.nickName ? this.nickName : this.name}</span>
+      <span class="text-capitalize ${this.isActive ? 'text-light' : 'text-success'}">${this.name}</span>
     </li>
     `
   }
@@ -24,7 +23,7 @@ export class Pokemon {
 export class DetailedPokemon extends Pokemon {
   constructor(data) {
     super(data)
-    this.id = data.id
+    this.id = data._id || ''
     this.nickName = data.nickName ?? ''
     this.img = data.img ?? data.sprites.front_default
     this.backImg = data.backImg ?? data.sprites.back_default
@@ -41,8 +40,9 @@ export class DetailedPokemon extends Pokemon {
     return `
     <div
       class="border border-1 border-danger rounded text-success p-2 h-100 d-flex flex-column justify-content-between">
-      <div class="border border-1 border-success rounded px-3 py-1 d-flex text-capitalize">
+      <div class="border border-1 border-success rounded px-3 py-1 d-flex justify-content-between text-capitalize">
         <span>${this.name}</span>
+        <span>${this.nickName}</span>
       </div>
       <div class="d-flex justify-content-center">
         <img src="${this.img}" alt="Front of ${this.name}" class="w-25">
@@ -78,21 +78,43 @@ export class DetailedPokemon extends Pokemon {
             <span>${this.heightAsFeet} ft</span>
           </div>
         </div>
-        ${this.catchButton}
+        ${this.sandboxButton}
       </div>
     </div>
     `
   }
 
-  get catchButton() {
+  get listHTMLTemplate() {
+    return `
+    <li onclick="app.SandboxPokemonsController.setActivePokemon('${this.id}')" class="d-flex gap-2 align-items-center mb-1" role="button" title="See details for ${this.nickName || this.name}">
+      <i class="mdi mdi-pokeball ${this.isActive ? 'mdi-spin' : ''}"></i>
+      <span class="text-capitalize ${this.isActive ? 'text-light' : 'text-success'}">${this.nickName || this.name}</span>
+    </li>
+    `
+  }
+
+  get sandboxButton() {
     if (!AppState.user) return ''
 
+    return this.id ? this.releaseButton : this.catchButton
+  }
+  get catchButton() {
     return `
     <div class="text-center mt-2">
       <button onclick="app.SandboxPokemonsController.catchPokemon()" class="btn btn-success">Catch em!</button>
     </div>
     `
+  }
+  get releaseButton() {
+    return `
+    <div class="text-center mt-2">
+      <button onclick="app.SandboxPokemonsController.releasePokemon()" class="btn btn-danger">Release em!</button>
+    </div>
+    `
+  }
 
+  get isActive() {
+    return this.id == AppState.activePokemon?.id
   }
 
   get weightAsPounds() {

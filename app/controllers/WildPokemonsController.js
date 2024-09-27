@@ -8,6 +8,7 @@ export class WildPokemonsController {
     AppState.on('wildPokemons', this.drawWildPokemons)
     AppState.on('activePokemon', this.drawActivePokemon)
     AppState.on('activePokemon', this.drawWildPokemons)
+    AppState.on('activeRegion', this.getWildPokemonsByRegion)
 
     this.getWildPokemons()
   }
@@ -24,6 +25,15 @@ export class WildPokemonsController {
   async getWildPokemonDetailsByName(pokemonName) {
     try {
       await wildPokemonsService.getWildPokemonDetailsByName(pokemonName)
+    } catch (error) {
+      Pop.error(error)
+      console.error(error);
+    }
+  }
+
+  async getWildPokemonsByRegion() {
+    try {
+      await wildPokemonsService.getWildPokemonsByRegion()
     } catch (error) {
       Pop.error(error)
       console.error(error);

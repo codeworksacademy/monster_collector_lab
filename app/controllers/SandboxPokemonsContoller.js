@@ -31,6 +31,22 @@ export class SandboxPokemonsController {
     }
   }
 
+  async releasePokemon() {
+    try {
+      const pokemonToRelease = AppState.activePokemon
+      const wantsToRelease = window.confirm(`Are you sure that you want to release ${pokemonToRelease.nickName ? pokemonToRelease.nickName : pokemonToRelease.name}?`)
+      if (!wantsToRelease) return
+      await sandboxPokemonsService.releasePokemon()
+    } catch (error) {
+      Pop.error(error)
+      console.error(error);
+    }
+  }
+
+  setActivePokemon(pokemonId) {
+    sandboxPokemonsService.setActivePokemon(pokemonId)
+  }
+
   drawMyPokemonElem() {
     const myPokemonsElem = document.getElementById('my-pokemons')
     myPokemonsElem.classList.remove('d-none')
