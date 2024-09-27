@@ -11,6 +11,7 @@ class SandboxPokemonsService {
     console.log('CAUGHT POKEMON', response.data);
     const caughtPokemon = new DetailedPokemon(response.data)
     AppState.sandboxPokemons.push(caughtPokemon)
+    AppState.activePokemon = caughtPokemon
   }
 
   async getMySandboxPokemons() {
