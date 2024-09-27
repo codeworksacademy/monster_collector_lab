@@ -23,7 +23,7 @@ export class Pokemon {
 export class DetailedPokemon extends Pokemon {
   constructor(data) {
     super(data)
-    this.id = data._id || ''
+    this.id = data._id ?? ''
     this.nickName = data.nickName ?? ''
     this.img = data.img ?? data.sprites.front_default
     this.backImg = data.backImg ?? data.sprites.back_default

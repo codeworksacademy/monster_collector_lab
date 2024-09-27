@@ -1,5 +1,5 @@
 import { AppState } from "../AppState.js"
-import { DetailedPokemon, Pokemon } from "../models/Pokemon.js"
+import { DetailedPokemon } from "../models/Pokemon.js"
 import { api } from "./AxiosService.js"
 import { wildPokemonsService } from "./WildPokemonsService.js"
 
